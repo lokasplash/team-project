@@ -2,7 +2,11 @@
     HEADER STRUCTURE (TENTATIVE)
 */
 
-typedef struct
+#ifndef PROJECT_H
+#define PROJECT_H
+
+
+typedef struct 
 {
     char* title;
     int year;
@@ -11,13 +15,6 @@ typedef struct
     int minute;
 }MOVIE;
 
-typedef struct
-{
-    HASH_UNIT* pHash;
-    int count;
-    int arySize;
-    TREE_NODE* pTree;
-}listHead;
 
 typedef struct treeNode
 {
@@ -26,14 +23,28 @@ typedef struct treeNode
     struct treeNode* right;
 }TREE_NODE;
 
+typedef struct hashNode
+{
+    MOVIE* dataPtr;
+    struct hashNode* next;
+}HASH_NODE;
+
 typedef struct
 {
     int collisionCount;
     HASH_NODE* data;
 }HASH_UNIT;
 
-typedef struct hashNode
+namespace std{
+	class xhash;		// forward declaration for xhash class from xhash.h
+}
+
+typedef struct
 {
-    MOVIE* dataPtr;
-    struct hashNode* next;
-}HASH_NODE;
+    xhash* pHash;
+    int count;
+    int arySize;
+    TREE_NODE* pTree;
+}listHead;
+
+#endif
